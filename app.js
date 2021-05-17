@@ -20,6 +20,20 @@ const redisClient = redis.createClient({
 const app = express();
 
 passportConfig();
+app.set('port', process.env.PORT || 7000);
+
+sequelize.sync({ force: false }).
+    then(() => {
+        console.log('데이터베이스 연결 성공');
+    }).catch(err => {
+        console.log('연결 실패', err);
+    });
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(morgan('combined'));
+} else {
+    app.use(morgan('dev'));
+}
 
 const userRoute = require('./routes/user');
 const drugRoute = require('./routes/drug');
@@ -40,19 +54,10 @@ const sessionOption = {
     },
     store: new RedisStore({ client: redisClient }),
 };
-
-sequelize.sync({ force: false }).
-    then(() => {
-        console.log('데이터베이스 연결 성공');
-    }).catch(err => {
-        console.log('연결 실패', err);
-    });
-
 if (process.env.NODE_ENV === 'production') {
-    app.use(morgan('combined'));
-} else {
-    app.use(morgan('dev'));
-}
+    sessionOption.proxy = true;
+    // sessionOption.cookie.secure = true;
+  }
 
 app.use(session(sessionOption));
 app.use(passport.initialize()); // 요청(req)에 passport 설정을 심는다.

@@ -1,12 +1,11 @@
 {
-  "name": "wtm_db_test",
+  "name": "wtm_db_test2",
   "version": "1.0.0",
   "description": "wtm's REST API server",
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production PORT=80 node server",
-    "dev": "nodemon server",
-    "postinstall": "pip install opencv-python"
+    "dev": "nodemon server"
   },
   "keywords": [],
   "author": "Welcome, Mathematics",
@@ -25,7 +24,6 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "node-gyp": "^8.0.0",
-    "node-opencv": "^0.0.2-security",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.1",
@@ -35,11 +33,5 @@
     "sequelize": "^6.5.0",
     "sequelize-cli": "^6.2.0",
     "xml-js": "^1.6.11"
-  },
-  "opencv4nodejs": {
-    "disableAutoBuild": 1,
-    "opencvIncludeDir": "C:\\tools\\opencv\\build\\include",
-    "opencvLibDir": "C:\\tools\\opencv\\build\\x64\\vc15\\lib",
-    "opencvBinDir": "C:\\tools\\opencv\\build\\x64\\vc15\\bin"
   }
 }
